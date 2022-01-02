@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AnchorPositioned {
-  AnchorPositioned({
+class Anchored {
+  Anchored({
     required this.targetRect,
     required this.targetAnchor,
     required this.childAnchor,
