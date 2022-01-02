@@ -1,3 +1,4 @@
+import 'package:anchored/anchored.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,16 +17,18 @@ class MyApp extends StatelessWidget {
           title: const Text('Anchored Example'),
         ),
         body: Stack(
-          children: const [
+          children: [
             Positioned(
-              left: 0,
-              top: 0,
-              child: AnchoredWidget(),
+              left: TargetWidget.rect.left,
+              top: TargetWidget.rect.top,
+              child: const TargetWidget(),
             ),
-            Positioned(
-              left: 60,
-              top: 300,
-              child: TargetWidget(),
+            const Anchored(
+              targetRect: TargetWidget.rect,
+              targetAnchor: Alignment.bottomCenter,
+              childAnchor: Alignment.topCenter,
+              childSize: AnchoredWidget.size,
+              child: AnchoredWidget(),
             ),
           ],
         ),
@@ -37,11 +40,13 @@ class MyApp extends StatelessWidget {
 class TargetWidget extends StatelessWidget {
   const TargetWidget({Key? key}) : super(key: key);
 
+  static const rect = Rect.fromLTWH(60, 300, 80, 80);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      width: 80,
+      height: rect.height,
+      width: rect.width,
       color: Colors.blue,
       alignment: Alignment.center,
       child: const Text(
@@ -57,11 +62,13 @@ class TargetWidget extends StatelessWidget {
 class AnchoredWidget extends StatelessWidget {
   const AnchoredWidget({Key? key}) : super(key: key);
 
+  static const size = Size(80, 80);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      width: 80,
+      height: size.height,
+      width: size.width,
       color: Colors.red,
       alignment: Alignment.center,
       child: const Text(
